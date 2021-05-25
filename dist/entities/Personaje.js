@@ -24,48 +24,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 exports.__esModule = true;
-exports.User = void 0;
+exports.Personaje = void 0;
 var typeorm_1 = require("typeorm");
 var Planeta_1 = require("./Planeta");
-var Personaje_1 = require("./Personaje");
-var User = /** @class */ (function (_super) {
-    __extends(User, _super);
-    function User() {
+var Personaje = /** @class */ (function (_super) {
+    __extends(Personaje, _super);
+    function Personaje() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], User.prototype, "id");
+    ], Personaje.prototype, "id");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], User.prototype, "Nombre");
+    ], Personaje.prototype, "Nombre");
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", Number)
+    ], Personaje.prototype, "Estatura");
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", Date)
+    ], Personaje.prototype, "Fecha_Nacimiento");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], User.prototype, "Apellido");
-    __decorate([
-        typeorm_1.Column({ unique: true }),
-        __metadata("design:type", String)
-    ], User.prototype, "Correo");
+    ], Personaje.prototype, "Foto");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], User.prototype, "Contrase\u00F1a");
+    ], Personaje.prototype, "Color_de_ojos");
     __decorate([
-        typeorm_1.ManyToMany(function () { return Planeta_1.Planeta; }),
-        typeorm_1.JoinTable(),
-        __metadata("design:type", Array)
-    ], User.prototype, "planetas");
-    __decorate([
-        typeorm_1.ManyToMany(function () { return Personaje_1.Personaje; }),
-        typeorm_1.JoinTable(),
-        __metadata("design:type", Array)
-    ], User.prototype, "personajes");
-    User = __decorate([
+        typeorm_1.ManyToOne(function () { return Planeta_1.Planeta; }, function (planeta) { return planeta.personajes; }),
+        __metadata("design:type", Planeta_1.Planeta)
+    ], Personaje.prototype, "planet");
+    Personaje = __decorate([
         typeorm_1.Entity()
-    ], User);
-    return User;
+    ], Personaje);
+    return Personaje;
 }(typeorm_1.BaseEntity));
-exports.User = User;
+exports.Personaje = Personaje;

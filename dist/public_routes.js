@@ -10,7 +10,13 @@ exports.__esModule = true;
 var express_1 = require("express");
 var utils_1 = require("./utils");
 var actions_1 = require("./actions");
+var actions_2 = require("./actions");
 var router = express_1.Router();
 // signup route, creates a new user in the DB
-router.post('/user', utils_1.safe(actions_1.createUser));
+router.post('/users', utils_1.safe(actions_2.createUser));
+router.post('/login', utils_1.safe(actions_1.login));
+router.get('/people', utils_1.safe(actions_2.getPeople));
+router.get('/people/:id', utils_1.safe(actions_2.getPeoplePorId));
+router.get('/planetas', utils_1.safe(actions_2.getPlanets));
+router.get('/planetas/:id', utils_1.safe(actions_2.getPlanetaPorId));
 exports["default"] = router;
