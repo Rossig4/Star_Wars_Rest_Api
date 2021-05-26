@@ -35,10 +35,10 @@ const verifyToken= (req: Request,res:Response, next:NextFunction) =>{
 
 
 router.get('/users',verifyToken, safe(actions.getUsers));
-router.post('/people', verifyToken,  safe(actions.createPeople));
+router.post('/people',  safe(actions.createPeople));
 router.put('/people/:id', verifyToken, safe(actions.updatePeople));
 router.delete('/users/:id', safe(actions.deleteUsers));
-router.post('/planetas', verifyToken, safe(actions.createPlanetas));
+router.post('/planetas', safe(actions.createPlanetas));
 router.put('/planetas/:id', verifyToken, safe(actions.updatePlanetas));
 
 export default router;

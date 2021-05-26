@@ -47,12 +47,8 @@ var Personaje = /** @class */ (function (_super) {
     ], Personaje.prototype, "Estatura");
     __decorate([
         typeorm_1.Column(),
-        __metadata("design:type", Date)
-    ], Personaje.prototype, "Fecha_Nacimiento");
-    __decorate([
-        typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Personaje.prototype, "Foto");
+    ], Personaje.prototype, "Fecha_Nacimiento");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)

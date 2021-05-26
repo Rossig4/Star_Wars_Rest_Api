@@ -129,11 +129,9 @@ var createPeople = function (req, res) { return __awaiter(void 0, void 0, void 0
                 if (!req.body.Nombre)
                     throw new utils_1.Exception("Por favor ingrese un nombre");
                 if (!req.body.Estatura)
-                    throw new utils_1.Exception("Por favor indique su estatura");
+                    throw new utils_1.Exception("Por favor indique estatura");
                 if (!req.body.Fecha_Nacimiento)
-                    throw new utils_1.Exception("Por favor ingrese su fecha de nacimiento");
-                if (!req.body.Foto)
-                    throw new utils_1.Exception("Por favor adjunte su fotografía");
+                    throw new utils_1.Exception("Por favor ingrese fecha de nacimiento");
                 if (!req.body.Color_de_ojos)
                     throw new utils_1.Exception("Por favor indique color de ojos");
                 nuevoPers = typeorm_1.getRepository(Personaje_1.Personaje).create(req.body);
@@ -200,8 +198,6 @@ var createPlanetas = function (req, res) { return __awaiter(void 0, void 0, void
                     throw new utils_1.Exception("Por favor ingrese un nombre");
                 if (!req.body.Rotación)
                     throw new utils_1.Exception("Por favor ingrese un valor de rotación");
-                if (!req.body.Imagen)
-                    throw new utils_1.Exception("Por favor adjunte una imagen");
                 if (!req.body.Diámetro)
                     throw new utils_1.Exception("Por favor introduzca diámetro");
                 if (!req.body.Gravedad)

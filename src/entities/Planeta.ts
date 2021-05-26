@@ -13,9 +13,6 @@ export class Planeta extends BaseEntity {
 
     @Column()
       Rotación: number
-
-      @Column()
-      Imagen: string
     
       @Column()
       Diámetro: number

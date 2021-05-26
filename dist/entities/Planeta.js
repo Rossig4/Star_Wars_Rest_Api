@@ -47,10 +47,6 @@ var Planeta = /** @class */ (function (_super) {
     ], Planeta.prototype, "Rotaci\u00F3n");
     __decorate([
         typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Planeta.prototype, "Imagen");
-    __decorate([
-        typeorm_1.Column(),
         __metadata("design:type", Number)
     ], Planeta.prototype, "Di\u00E1metro");
     __decorate([

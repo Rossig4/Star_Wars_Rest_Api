@@ -53,9 +53,9 @@ var verifyToken = function (req, res, next) {
     next();
 };
 router.get('/users', verifyToken, utils_1.safe(actions.getUsers));
-router.post('/people', verifyToken, utils_1.safe(actions.createPeople));
+router.post('/people', utils_1.safe(actions.createPeople));
 router.put('/people/:id', verifyToken, utils_1.safe(actions.updatePeople));
 router["delete"]('/users/:id', utils_1.safe(actions.deleteUsers));
-router.post('/planetas', verifyToken, utils_1.safe(actions.createPlanetas));
+router.post('/planetas', utils_1.safe(actions.createPlanetas));
 router.put('/planetas/:id', verifyToken, utils_1.safe(actions.updatePlanetas));
 exports["default"] = router;

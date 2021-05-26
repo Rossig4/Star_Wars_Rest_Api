@@ -15,13 +15,11 @@ export class Personaje extends BaseEntity {
       Estatura: number
 
       @Column()
-      Fecha_Nacimiento: Date
-
-      @Column()
-      Foto: string
+      Fecha_Nacimiento: string
 
       @Column()
       Color_de_ojos: string
+
 
       
     @ManyToOne(() => Planeta, planeta => planeta.personajes)

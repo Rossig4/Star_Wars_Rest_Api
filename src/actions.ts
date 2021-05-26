@@ -50,9 +50,8 @@ export const deleteUsers = async (req: Request, res: Response): Promise<Response
 export const createPeople = async (req: Request, res:Response): Promise<Response> =>{
 
 	if(!req.body.Nombre) throw new Exception("Por favor ingrese un nombre")
-	if(!req.body.Estatura) throw new Exception("Por favor indique su estatura")
-	if(!req.body.Fecha_Nacimiento) throw new Exception("Por favor ingrese su fecha de nacimiento")
-    if(!req.body.Foto) throw new Exception("Por favor adjunte su fotografía")
+	if(!req.body.Estatura) throw new Exception("Por favor indique estatura")
+	if(!req.body.Fecha_Nacimiento) throw new Exception("Por favor ingrese fecha de nacimiento")
     if(!req.body.Color_de_ojos) throw new Exception("Por favor indique color de ojos")
         
 	const nuevoPers = getRepository(Personaje).create(req.body);  
@@ -85,7 +84,6 @@ export const createPlanetas = async (req: Request, res:Response): Promise<Respon
 
 	if(!req.body.Nombre) throw new Exception("Por favor ingrese un nombre")
 	if(!req.body.Rotación) throw new Exception("Por favor ingrese un valor de rotación")
-	if(!req.body.Imagen) throw new Exception("Por favor adjunte una imagen")
     if(!req.body.Diámetro) throw new Exception("Por favor introduzca diámetro")
     if(!req.body.Gravedad) throw new Exception("Por favor introduzca valor referente a la gravedad")
         
