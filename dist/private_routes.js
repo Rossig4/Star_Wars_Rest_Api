@@ -38,24 +38,24 @@ var express_1 = require("express");
 var utils_1 = require("./utils");
 var actions = __importStar(require("./actions"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var actions_1 = require("./actions");
+//import { createPeople, createPlanetas, updatePeople, updatePlanetas, deleteUsers } from './actions';
 // declare a new router to include all the endpoints
 var router = express_1.Router();
-//middleware/token
+//middleware con token
 var verifyToken = function (req, res, next) {
-    //headers con el token
-    var token = req.header('Authorization');
+    //headers con token
+    var token = req.header('Autorización');
     if (!token)
-        return res.status(400).json('ACCESS DENIED');
+        return res.status(400).json('ACCESO DENEGADO');
     var decoded = jsonwebtoken_1["default"].verify(token, process.env.JWT_KEY);
     req.user = decoded;
     console.log(decoded);
     next();
 };
 router.get('/users', verifyToken, utils_1.safe(actions.getUsers));
-router.post('/people', verifyToken, utils_1.safe(actions_1.createPeople));
-router.put('/people/:id', verifyToken, utils_1.safe(actions_1.updatePeople));
-router["delete"]('/users/:id', utils_1.safe(actions_1.deleteUsers));
-router.post('/planetas', verifyToken, utils_1.safe(actions_1.createPlanetas));
-router.put('/planetas/:id', verifyToken, utils_1.safe(actions_1.updatePlanetas));
+router.post('/people', verifyToken, utils_1.safe(actions.createPeople));
+router.put('/people/:id', verifyToken, utils_1.safe(actions.updatePeople));
+router["delete"]('/users/:id', utils_1.safe(actions.deleteUsers));
+router.post('/planetas', verifyToken, utils_1.safe(actions.createPlanetas));
+router.put('/planetas/:id', verifyToken, utils_1.safe(actions.updatePlanetas));
 exports["default"] = router;

@@ -26,6 +26,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 exports.__esModule = true;
 exports.Planeta = void 0;
 var typeorm_1 = require("typeorm");
+var Personaje_1 = require("./Personaje");
+var User_1 = require("./User");
 var Planeta = /** @class */ (function (_super) {
     __extends(Planeta, _super);
     function Planeta() {
@@ -55,6 +57,15 @@ var Planeta = /** @class */ (function (_super) {
         typeorm_1.Column(),
         __metadata("design:type", String)
     ], Planeta.prototype, "Gravedad");
+    __decorate([
+        typeorm_1.ManyToMany(function () { return User_1.User; }, function (user) { return user.planetas; }),
+        typeorm_1.JoinTable(),
+        __metadata("design:type", Array)
+    ], Planeta.prototype, "user");
+    __decorate([
+        typeorm_1.OneToMany(function () { return Personaje_1.Personaje; }, function (personaje) { return personaje.planeta; }),
+        __metadata("design:type", Array)
+    ], Planeta.prototype, "personajes");
     Planeta = __decorate([
         typeorm_1.Entity()
     ], Planeta);

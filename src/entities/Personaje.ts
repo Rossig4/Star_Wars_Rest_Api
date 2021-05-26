@@ -1,5 +1,6 @@
-import {Entity,PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne} from "typeorm";
+import {Entity,PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, OneToMany, JoinTable, ManyToOne} from "typeorm";
 import { Planeta } from "./Planeta";
+import { User } from "./User"
 
 @Entity()
 export class Personaje extends BaseEntity {
@@ -24,5 +25,10 @@ export class Personaje extends BaseEntity {
 
       
     @ManyToOne(() => Planeta, planeta => planeta.personajes)
-    planet: Planeta;
+    planeta: Planeta;
+
+
+@ManyToMany(() => User,  user => user.personajes)
+    @JoinTable()
+    user: User[];
 }

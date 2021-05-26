@@ -129,3 +129,10 @@ export const login = async (req: Request, res: Response): Promise<Response> =>{
 	
 	return res.json({ user, token });
 }
+
+
+
+
+
+
+

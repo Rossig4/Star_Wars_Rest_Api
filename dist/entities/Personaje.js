@@ -27,6 +27,7 @@ exports.__esModule = true;
 exports.Personaje = void 0;
 var typeorm_1 = require("typeorm");
 var Planeta_1 = require("./Planeta");
+var User_1 = require("./User");
 var Personaje = /** @class */ (function (_super) {
     __extends(Personaje, _super);
     function Personaje() {
@@ -59,7 +60,12 @@ var Personaje = /** @class */ (function (_super) {
     __decorate([
         typeorm_1.ManyToOne(function () { return Planeta_1.Planeta; }, function (planeta) { return planeta.personajes; }),
         __metadata("design:type", Planeta_1.Planeta)
-    ], Personaje.prototype, "planet");
+    ], Personaje.prototype, "planeta");
+    __decorate([
+        typeorm_1.ManyToMany(function () { return User_1.User; }, function (user) { return user.personajes; }),
+        typeorm_1.JoinTable(),
+        __metadata("design:type", Array)
+    ], Personaje.prototype, "user");
     Personaje = __decorate([
         typeorm_1.Entity()
     ], Personaje);
