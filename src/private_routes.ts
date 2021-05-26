@@ -42,3 +42,4 @@ router.post('/planetas', safe(actions.createPlanetas));
 router.put('/planetas/:id', verifyToken, safe(actions.updatePlanetas));
 
 export default router;
+
