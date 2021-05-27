@@ -35,11 +35,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.login = exports.updatePlanetas = exports.getPlanetaPorId = exports.getPlanets = exports.createPlanetas = exports.updatePeople = exports.getPeoplePorId = exports.getPeople = exports.createPeople = exports.deleteUsers = exports.updateUser = exports.getUsers = exports.createUser = void 0;
+exports.deleteFavPers = exports.addFavPers = exports.deleteFavPlaneta = exports.addFavPlaneta = exports.login = exports.updatePlanetas = exports.getPlanetaPorId = exports.getPlanets = exports.createPlanetas = exports.updatePeople = exports.getPeoplePorId = exports.getPeople = exports.createPeople = exports.deleteUsers = exports.updateUser = exports.getUsers = exports.createUser = void 0;
 var typeorm_1 = require("typeorm");
 var User_1 = require("./entities/User");
 var utils_1 = require("./utils");
@@ -280,3 +285,99 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
     });
 }); };
 exports.login = login;
+var addFavPlaneta = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var planetaRepo, userRepo, user, planeta, results;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                planetaRepo = typeorm_1.getRepository(Planeta_1.Planeta);
+                userRepo = typeorm_1.getRepository(User_1.User);
+                return [4 /*yield*/, userRepo.findOne(req.params.userid, { relations: ["planetas"] })];
+            case 1:
+                user = _a.sent();
+                return [4 /*yield*/, planetaRepo.findOne(req.params.planetaid)];
+            case 2:
+                planeta = _a.sent();
+                if (!(user && planeta)) return [3 /*break*/, 4];
+                user.planetas = __spreadArray(__spreadArray([], user.planetas), [planeta]);
+                return [4 /*yield*/, userRepo.save(user)];
+            case 3:
+                results = _a.sent();
+                return [2 /*return*/, res.json(results)];
+            case 4: return [2 /*return*/, res.json("ERROR")];
+        }
+    });
+}); };
+exports.addFavPlaneta = addFavPlaneta;
+var deleteFavPlaneta = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, planetaToDelete, result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne({ relations: ["planetas"], where: { id: req.params.userid } })];
+            case 1:
+                user = _a.sent();
+                return [4 /*yield*/, typeorm_1.getRepository(Planeta_1.Planeta).findOne({ where: { id: req.params.planetaid } })];
+            case 2:
+                planetaToDelete = _a.sent();
+                result = { error: "no existe" };
+                if (!(user && planetaToDelete)) return [3 /*break*/, 4];
+                user.planetas = user.planetas.filter(function (planeta) {
+                    return planeta.id !== planetaToDelete.id;
+                });
+                return [4 /*yield*/, typeorm_1.getRepository(User_1.User).save(user)];
+            case 3:
+                result = _a.sent();
+                _a.label = 4;
+            case 4: return [2 /*return*/, res.json(result)];
+        }
+    });
+}); };
+exports.deleteFavPlaneta = deleteFavPlaneta;
+var addFavPers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var persRepo, userRepo, user, personaje, results;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                persRepo = typeorm_1.getRepository(Personaje_1.Personaje);
+                userRepo = typeorm_1.getRepository(User_1.User);
+                return [4 /*yield*/, userRepo.findOne(req.params.userid, { relations: ["personajes"] })];
+            case 1:
+                user = _a.sent();
+                return [4 /*yield*/, persRepo.findOne(req.params.personajeid)];
+            case 2:
+                personaje = _a.sent();
+                if (!(user && personaje)) return [3 /*break*/, 4];
+                user.personajes = __spreadArray(__spreadArray([], user.personajes), [personaje]);
+                return [4 /*yield*/, userRepo.save(user)];
+            case 3:
+                results = _a.sent();
+                return [2 /*return*/, res.json(results)];
+            case 4: return [2 /*return*/, res.json("ERROR")];
+        }
+    });
+}); };
+exports.addFavPers = addFavPers;
+var deleteFavPers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, personajeToDelete, result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne({ relations: ["personajes"], where: { id: req.params.userid } })];
+            case 1:
+                user = _a.sent();
+                return [4 /*yield*/, typeorm_1.getRepository(Personaje_1.Personaje).findOne({ where: { id: req.params.personajeid } })];
+            case 2:
+                personajeToDelete = _a.sent();
+                result = { error: "El personaje o usuario no existe" };
+                if (!(user && personajeToDelete)) return [3 /*break*/, 4];
+                user.personajes = user.personajes.filter(function (personaje) {
+                    return personaje.id !== personajeToDelete.id;
+                });
+                return [4 /*yield*/, typeorm_1.getRepository(User_1.User).save(user)];
+            case 3:
+                result = _a.sent();
+                _a.label = 4;
+            case 4: return [2 /*return*/, res.json(result)];
+        }
+    });
+}); };
+exports.deleteFavPers = deleteFavPers;

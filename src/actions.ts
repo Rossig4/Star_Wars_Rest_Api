@@ -128,9 +128,56 @@ export const login = async (req: Request, res: Response): Promise<Response> =>{
 	return res.json({ user, token });
 }
 
+export const addFavPlaneta = async (req: Request, res: Response): Promise<Response> => {
+const planetaRepo = getRepository(Planeta)
+const userRepo = getRepository(User)
+const user = await userRepo.findOne(req.params.userid, {relations:["planetas"]})
+const planeta = await planetaRepo.findOne(req.params.planetaid)
+if (user && planeta) {
+user.planetas = [...user.planetas,planeta]
+const results = await userRepo.save(user)
+return res.json(results)
+}
+return res.json("ERROR")
+}
 
 
+export const deleteFavPlaneta = async (req: Request, res: Response): Promise<Response> => {
+const user = await getRepository(User).findOne({relations:["planetas"], where:{id: req.params.userid}});
+const planetaToDelete = await getRepository(Planeta).findOne({where: {id: req.params.planetaid}})
+let result:any = { error: "no existe"};
+if( user && planetaToDelete){
+user.planetas = user.planetas.filter( planeta => {
+return planeta.id !== planetaToDelete.id;
+})
+result = await getRepository(User).save(user);
+}
+return res.json(result)
+}
+
+export const addFavPers = async (req: Request, res: Response): Promise<Response> => {
+const persRepo = getRepository(Personaje)
+const userRepo = getRepository(User)
+const user = await userRepo.findOne(req.params.userid, {relations:["personajes"]})
+const personaje = await persRepo.findOne(req.params.personajeid)
+if (user && personaje) {
+user.personajes = [...user.personajes,personaje]
+const results = await userRepo.save(user)
+return res.json(results)
+}
+return res.json("ERROR")
+}
 
 
-
-
+export const deleteFavPers = async (req: Request, res: Response): Promise<Response> => {
+const user = await getRepository(User).findOne({relations:["personajes"], where:{id: req.params.userid}});
+const personajeToDelete = await getRepository(Personaje).findOne({where: {id: req.params.personajeid}})
+let result:any = { error: "El personaje o usuario no existe"};
+if( user && personajeToDelete){
+user.personajes = user.personajes.filter( personaje => {
+return personaje.id !== personajeToDelete.id;
+})
+result = await getRepository(User).save(user);
+}
+return res.json(result)
+}

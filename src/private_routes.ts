@@ -23,7 +23,7 @@ const router = Router();
 //middleware con token
 const verifyToken= (req: Request,res:Response, next:NextFunction) =>{
     //headers con token
-     const token = req.header('Autorización');
+     const token = req.header('Authorization');
     if(!token) return res.status(400).json('ACCESO DENEGADO');
 
     const decoded = jwt.verify(token as string, process.env.JWT_KEY as string)
@@ -34,12 +34,16 @@ const verifyToken= (req: Request,res:Response, next:NextFunction) =>{
 }
 
 
-router.get('/users',verifyToken, safe(actions.getUsers));
+router.get('/users', verifyToken, safe(actions.getUsers));
 router.post('/people',  safe(actions.createPeople));
 router.put('/people/:id', verifyToken, safe(actions.updatePeople));
 router.delete('/users/:id', safe(actions.deleteUsers));
 router.post('/planetas', safe(actions.createPlanetas));
 router.put('/planetas/:id', verifyToken, safe(actions.updatePlanetas));
+router.post('/planetas/users/:userid/:planetaid',verifyToken, safe(actions.addFavPlaneta));
+router.delete('/planetas/users/:userid/:planetaid',verifyToken, safe(actions.deleteFavPlaneta));
+router.post('/personaje/users/:userid/:personajeid',verifyToken, safe(actions.addFavPers));
+router.delete('/personaje/users/:userid/:personajeid',verifyToken, safe(actions.deleteFavPers));
 
 export default router;
 

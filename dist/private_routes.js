@@ -44,7 +44,7 @@ var router = express_1.Router();
 //middleware con token
 var verifyToken = function (req, res, next) {
     //headers con token
-    var token = req.header('Autorización');
+    var token = req.header('Authorization');
     if (!token)
         return res.status(400).json('ACCESO DENEGADO');
     var decoded = jsonwebtoken_1["default"].verify(token, process.env.JWT_KEY);
@@ -58,4 +58,8 @@ router.put('/people/:id', verifyToken, utils_1.safe(actions.updatePeople));
 router["delete"]('/users/:id', utils_1.safe(actions.deleteUsers));
 router.post('/planetas', utils_1.safe(actions.createPlanetas));
 router.put('/planetas/:id', verifyToken, utils_1.safe(actions.updatePlanetas));
+router.post('/planetas/users/:userid/:planetaid', verifyToken, utils_1.safe(actions.addFavPlaneta));
+router["delete"]('/planetas/users/:userid/:planetaid', verifyToken, utils_1.safe(actions.deleteFavPlaneta));
+router.post('/personaje/users/:userid/:personajeid', verifyToken, utils_1.safe(actions.addFavPers));
+router["delete"]('/personaje/users/:userid/:personajeid', verifyToken, utils_1.safe(actions.deleteFavPers));
 exports["default"] = router;
